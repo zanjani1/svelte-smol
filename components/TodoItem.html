@@ -1,0 +1,32 @@
+<div class="todo-item" x-data="{ completed: todo.completed, id: todo.id, title: todo.title, description: todo.description }" :class="{ 'completed': completed }">
+    <div class="view">
+        <input class="toggle" type="checkbox" x-model="completed" @change="toggleTodo(id)">
+        <label x-text="title"></label>
+        <button class="destroy" @click="deleteTodo(id)"></button>
+    </div>
+    <div class="edit">
+        <input class="edit-input" type="text" x-model="title" @keyup.enter="editTodo(id, title, description)">
+    </div>
+</div>
+
+<script>
+    function toggleTodo(id) {
+        let todo = getTodoById(id);
+        todo.completed = !todo.completed;
+        editTodo(todo);
+    }
+
+    function deleteTodo(id) {
+        let todo = getTodoById(id);
+        selectedTodo = todo;
+        document.getElementById('delete-todo-modal').classList.add('is-active');
+    }
+
+    function editTodo(id, title, description) {
+        let todo = getTodoById(id);
+        todo.title = title;
+        todo.description = description;
+        selectedTodo = todo;
+        document.getElementById('edit-todo-form').classList.add('is-active');
+    }
+</script>

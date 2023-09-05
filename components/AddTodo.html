@@ -1,0 +1,19 @@
+<div x-data="{ newTodo: { id: '', title: '', description: '', completed: false } }">
+    <form id="add-todo-form" @submit.prevent="addTodo" hx-post="/addTodo" hx-swap="outerHTML">
+        <label for="title">Title:</label>
+        <input type="text" id="title" x-model="newTodo.title" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" x-model="newTodo.description"></textarea>
+
+        <button type="submit">Add Todo</button>
+    </form>
+</div>
+
+<script>
+    function addTodo() {
+        this.todos.push(this.newTodo);
+        this.newTodo = { id: '', title: '', description: '', completed: false };
+        document.dispatchEvent(new CustomEvent('todoAdded'));
+    }
+</script>

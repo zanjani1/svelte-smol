@@ -1,0 +1,18 @@
+<div id="edit-todo-form" x-data="{ currentTodo: {} }" class="edit-mode">
+    <form @submit.prevent="editTodo()" hx-post="/editTodo" hx-swap="outerHTML">
+        <input type="hidden" x-model="currentTodo.id">
+        <div>
+            <label for="edit-title">Title</label>
+            <input id="edit-title" type="text" x-model="currentTodo.title" required>
+        </div>
+        <div>
+            <label for="edit-description">Description</label>
+            <textarea id="edit-description" x-model="currentTodo.description" required></textarea>
+        </div>
+        <div>
+            <label for="edit-completed">Completed</label>
+            <input id="edit-completed" type="checkbox" x-model="currentTodo.completed">
+        </div>
+        <button type="submit">Update Todo</button>
+    </form>
+</div>
