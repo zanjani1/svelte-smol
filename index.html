@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List App</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <div id="todo-list" x-data="todos">
+        <div class="todo-item" x-for="todo in todoList" :class="{completed: todo.completed}">
+            <div hx-include="components/TodoItem.html"></div>
+        </div>
+        <form id="add-todo-form" hx-include="components/AddTodo.html" hx-post="/addTodo" hx-swap="outerHTML"></form>
+        <form id="edit-todo-form" class="edit-mode" hx-include="components/EditTodo.html" hx-post="/editTodo" hx-swap="outerHTML"></form>
+        <div id="delete-todo-modal" class="delete-mode" hx-include="components/DeleteTodo.html" hx-post="/deleteTodo" hx-swap="outerHTML"></div>
+    </div>
+</body>
+</html>

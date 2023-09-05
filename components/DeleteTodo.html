@@ -1,0 +1,17 @@
+<div id="delete-todo-modal" x-data="{ currentTodo: null }" class="delete-mode">
+    <h2>Delete Todo</h2>
+    <p>Are you sure you want to delete this todo?</p>
+    <p x-text="currentTodo ? currentTodo.title : ''"></p>
+    <button @click="currentTodo = null">Cancel</button>
+    <button @click="deleteTodo()" hx-post="/deleteTodo" hx-swap="outerHTML">Delete</button>
+</div>
+
+<script>
+    function deleteTodo() {
+        const index = todoList.findIndex(todo => todo.id === currentTodo.id);
+        if (index !== -1) {
+            todoList.splice(index, 1);
+            currentTodo = null;
+        }
+    }
+</script>

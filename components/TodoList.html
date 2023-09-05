@@ -1,0 +1,14 @@
+```html
+<div id="todo-list" x-data="todos" hx-get="/getTodos" hx-swap="outerHTML">
+    <template x-for="(todo, index) in todos" :key="index">
+        <div class="todo-item" :class="{completed: todo.completed}">
+            <div x-text="todo.title"></div>
+            <div x-text="todo.description"></div>
+            <button @click="toggleTodo(todo.id)" x-text="todo.completed ? 'Mark as incomplete' : 'Mark as complete'"></button>
+            <button @click="selectedTodo = todo" hx-get="/components/EditTodo.html" hx-swap="outerHTML">Edit</button>
+            <button @click="selectedTodo = todo" hx-get="/components/DeleteTodo.html" hx-swap="outerHTML">Delete</button>
+        </div>
+    </template>
+    <div hx-get="/components/AddTodo.html" hx-swap="outerHTML"></div>
+</div>
+```
